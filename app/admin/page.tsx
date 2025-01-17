@@ -1,17 +1,13 @@
-import {isAdmin} from "@/lib/authUtils";
-import {redirect} from "next/navigation";
+import React from 'react'
+import Link from 'next/link'
 
-export default async function AdminPage() {
-    const isUserAdmin = await isAdmin();
-
-    if(!isUserAdmin){
-        redirect("/");
-    }
-
-    return(
-        <>
-            <h1>Admin Page</h1>
-            <p>Admins can do anything they want!</p>    
-        </>
-    )
+const Page = () => {
+  return (
+    <div>
+        <Link href = '../admin/signin'>Admin login</Link>
+        <Link href = '../admin/signup'>Admin signup</Link>
+    </div>
+  )
 }
+
+export default Page
