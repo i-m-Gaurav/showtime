@@ -1,11 +1,10 @@
-import React from 'react';
-import { Search, Menu } from 'lucide-react';
-import SignIn from '@/components/SignIn';
-import { auth } from '@/auth';
-import Image from 'next/image';
-import {SignOut} from '@/components/SignOut';
-import Link from 'next/link';
-
+import React from "react";
+import { Search, Menu } from "lucide-react";
+import SignIn from "@/components/SignIn";
+import { auth } from "@/auth";
+import Image from "next/image";
+import { SignOut } from "@/components/SignOut";
+import Link from "next/link";
 
 const Navbar = async () => {
   const session = await auth();
@@ -40,31 +39,39 @@ const Navbar = async () => {
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-2">
             <span className="text-sm font-medium">Patna</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </div>
 
           {session ? (
             <div className="flex items-center space-x-2">
-              <Image src={session.user.image || '/default-user.png'} alt="user" width={50} height={50} className="w-8 h-8 rounded-full" />
+              <Image
+                src={session.user.image || "/default-user.png"}
+                alt="user"
+                width={50}
+                height={50}
+                className="w-8 h-8 rounded-full"
+              />
               <span className="text-sm font-medium">{session.user.name}</span>
-              <SignOut/>
+              <SignOut />
             </div>
           ) : (
             <SignIn />
-
           )}
 
-       
-           
-<Link href="/admin">Admin</Link>
+          <Link href="/admin">Admin</Link>
 
-         
-         
-         
-          
-        
           <Menu className="h-6 w-6 text-gray-700" />
         </div>
       </div>
