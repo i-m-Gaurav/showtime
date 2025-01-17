@@ -5,6 +5,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+
+
   providers: [GitHub],
   callbacks: {
     async signIn({ user }) {
@@ -19,6 +21,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             data: {
               name: user.name!,
               email: user.email!,
+              image : user.image!,
               role : "user"
             },
           });
