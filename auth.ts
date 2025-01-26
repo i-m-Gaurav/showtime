@@ -1,37 +1,20 @@
-import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
-
-
-  providers: [GitHub],
-  callbacks: {
-    async signIn({ user }) {
-      // Save user data to the database
-      try {
-        const existingUser = await prisma.user.findUnique({
-          where: { email: user.email! },
-        });
-
-        if (!existingUser) {
-          await prisma.user.create({
-            data: {
-              name: user.name!,
-              email: user.email!,
-              image : user.image!,
-              role : "user"
-            },
-          });
-        }
-      } catch (error) {
-        console.error("Error saving user to database:", error);
-        return false; // Prevent sign-in if there's an error
+import NextAuth from "next-auth"
+import Google from "next-auth/providers/google"
+import prisma from "/lib/prisma"
+ 
+export const { handlers, auth } = NextAuth({
+  adapter: PrismaAdapter(prisma),
+  providers: [
+    Google({
+      profile(profile) {
+        return { role: profile.role ?? "user", ...profile }
       }
-
-      return true; // Allow sign-in
-    },
-  },
-});
+    })
+  ],
+  callbacks: {
+    session({ session, user }) {
+      session.user.role = user.role
+      return session
+    }
+  }
+})
