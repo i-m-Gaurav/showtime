@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 // Define the Show interface in a separate file (e.g., types.ts)
 interface Show {
@@ -16,15 +17,15 @@ interface Show {
 // Fetch shows data (can be moved to a separate service file)
 const fetchShows = async (): Promise<Show[]> => {
   try {
-    const response = await fetch("/api/shows");
-    if (!response.ok) throw new Error("Failed to fetch shows");
-    const data = await response.json();
+    const response = await axios.get("/api/shows");
+    const data = await response.data;
     return data.data;
   } catch (error) {
     console.error("Error fetching shows:", error);
     throw error;
   }
 };
+
 
 // ShowCard component for reusability
 const ShowCard = ({ show }: { show: Show }) => (

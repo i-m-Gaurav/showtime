@@ -6,11 +6,11 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
 
         
-        const { userId, showId, seatsBooked } = body; // Changed from showId to eventId
+        const { userId, showId, seatsBooked , paymentReference,userContact} = body; // Changed from showId to eventId
 
         const eventId = showId; // Changed from showId to eventId
 
-        console.log("Booking request:", { userId, showId, seatsBooked });
+        console.log("Booking request:", { userId, showId, seatsBooked,paymentReference,userContact });
 
         // Fetch event details
         const event = await prisma.event.findUnique({
@@ -32,8 +32,10 @@ export async function POST(req: NextRequest) {
                 userId,
                 eventId, // Matches your schema
                 seatsBooked,
+                userContact,
                 bookingDate: new Date(),
                 status: "booked",
+                paymentReference : paymentReference,
             },
         });
 

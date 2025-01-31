@@ -15,7 +15,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
               <h1 className="text-red-500 text-2xl font-bold">
-                book<span className="text-blue-500">my</span>show
+                show<span className="text-blue-500">Time</span>
               </h1>
             </div>
           </div>
