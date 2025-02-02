@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { Search } from "lucide-react";
 import { MapPin } from "lucide-react";
+import logo from '../public/logo.png'
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -14,9 +15,7 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              <h1 className="text-red-500 text-2xl font-bold">
-                show<span className="text-blue-500">Time</span>
-              </h1>
+              <Image src = {logo} alt = "logo image" width={120} height={120}/>
             </div>
           </div>
 
