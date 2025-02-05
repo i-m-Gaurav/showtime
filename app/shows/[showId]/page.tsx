@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Calendar, MapPin, Users } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-
+import useShowStore from '@/store/useStore';
 
 interface Show {
     id: string;
@@ -18,12 +18,21 @@ interface Show {
     availableSeats: number;
 }
 
+interface Seat {
+    id: string;
+    number: number;
+    status: string;
+}
+
 export default function ShowDetails({ params }: { params: { showId: string } }) {
     const [show, setShow] = useState<Show | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [seatsBooked, setSeatsBooked] = useState<number>(1);
-    // const [bookingMessage, setBookingMessage] = useState<string | null>(null);
-    
+    // const [seatsBooked, setSeatsBooked] = useState<number>(0);
+    const [seats, setSeats] = useState<Seat[]>([]);
+    const {seatsBooked,setSeatsBooked} = useShowStore();
+
+    console.log(seatsBooked);
+
     const { showId } = params;
     const {data : session} = useSession();
     const router = useRouter();
@@ -39,101 +48,28 @@ export default function ShowDetails({ params }: { params: { showId: string } }) 
             }
         };
 
+        //get all the seats details for a eventId, with status.
+
+        const fetchSeatsForEventId = async () => {
+            try {
+                const response = await axios.get('/api/seats?eventId=' + showId);
+                setSeats(response.data.seats);
+            } catch (error) {
+                console.error("Error", error);
+            }
+        }
+        fetchSeatsForEventId();
+
         if (showId) {
             fetchShowDetails();
         }
-    }, []);
+    }, [showId]);
 
-    //load the razorpay script.
-    // const loadRazorpayScript = () => {
-    //     return new Promise((resolve) => {
-    //         const script = document.createElement('script');
-    //         script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-    //         script.onload = () => resolve(true);
-    //         script.onerror = () => resolve(false);
-    //         document.body.appendChild(script);
-    //     });
-    // };
+    // Calculate available seats
+    const availableSeats = seats.filter(seat => seat.status === "available").length;
 
-    // const handleBooking = async () => {
-    //     setBookingMessage(null);
-    //     try {
-
-    //         const emailId = session?.user?.email;
-
-    //         const response = await axios.get('/api/user?email=' + emailId);
-
-    //         const id = response.data.id;
-
-
-    //         console.log(emailId);  
-            
-    //         const res = await axios.post("/api/createOrder",{
-    //             amount : 1 * seatsBooked,
-    //         })
-    //         const order = res.data;
-    //         console.log("order",order);
-    //         const isScriptLoaded = await loadRazorpayScript();
-    //         if (!isScriptLoaded) {
-    //             throw new Error('Failed to load Razorpay script');
-    //         }
-
-    //         //options
-    //          // Step 3: Open Razorpay Payment Modal
-    //     const options = {
-    //         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-    //         amount: order.amount * 100,
-    //         currency: order.currency,
-    //         name: 'Show Time',
-    //         description: 'Booking Payment',
-    //         order_id: order.id,
-    //         handler: async (res: any) => {
-    //             // Step 4: Verify Payment and Confirm Booking
-    //             try {
-    //                 const verifyResponse = await axios.post('/api/verifyPayment', {
-    //                     razorpayPaymentId: res.razorpay_payment_id,
-    //                     razorpayOrderId: res.razorpay_order_id,
-    //                     razorpaySignature: res.razorpay_signature,
-    //                 });
-
-    //                 if (verifyResponse.data.success) {
-    //                     // Step 5: Create Booking Record in Database
-    //                     await axios.post('/api/bookings', {
-    //                         userId : id,
-    //                         userContact : emailId,
-    //                         showId,
-    //                         seatsBooked,
-    //                         paymentReference: res.razorpay_payment_id,
-    //                     });
-
-    //                     setBookingMessage('Booking successful!');
-    //                     setShow((prev) => prev ? { ...prev, availableSeats: prev.availableSeats - seatsBooked } : prev);
-    //                 } else {
-    //                     setBookingMessage('Payment verification failed.');
-    //                 }
-    //             } catch (error) {
-    //                 console.error('Error verifying payment:', error);
-    //                 setBookingMessage('Payment verification failed.');
-    //             }
-    //         },
-    //         prefill: {
-    //             name: session?.user?.name,
-    //             email: session?.user?.email,
-    //         },
-    //         theme: {
-    //             color: '#3399cc',
-    //         },
-    //     };
-
-
-    //     const razorpayInstance = new (window as any).Razorpay(options);
-    //     razorpayInstance.open();
-
-    //     } catch (error) {
-    //         console.error('Error booking show:', error);
-    //         setBookingMessage("Booking failed");
-    //     }
-    // };
+    console.log('available seats are ',availableSeats)
+    const totalSeats = seats.length;
 
     if (error) {
         return (
@@ -194,19 +130,17 @@ export default function ShowDetails({ params }: { params: { showId: string } }) 
                                 onChange={(e) => setSeatsBooked(Number(e.target.value))}
                                 className="border p-2 rounded-md w-20 mr-2"
                                 min="1"
-                                max={show.availableSeats}
+                                max={availableSeats}
                             />
                             <button 
                                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
                                 // onClick={handleBooking}
                                 onClick  = {()=> router.push(`/shows/${showId}/selectSeat`)}
-                                disabled={show.availableSeats < seatsBooked}
+                                disabled={availableSeats < seatsBooked}
                             >
                                 Book Now
                             </button>
-                            {/* {bookingMessage && (
-                                <p className="mt-2 text-sm text-gray-600">{bookingMessage}</p>
-                            )} */}
+                           
                         </div>
                     </div>
 
@@ -232,7 +166,7 @@ export default function ShowDetails({ params }: { params: { showId: string } }) 
                             <div>
                                 <p className="text-sm text-gray-500">Seating</p>
                                 <p className="text-gray-700">
-                                    {show.availableSeats} available / {show.totalSeats} total
+                                    {availableSeats} available / {totalSeats} total
                                 </p>
                             </div>
                         </div>
