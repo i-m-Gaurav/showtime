@@ -27,8 +27,6 @@ export async function GET(
                 imageUrl : true,
                 totalSeats : true,
                 availableSeats : true,
-                
-
                 // Add other fields you want to return
             }
         });
