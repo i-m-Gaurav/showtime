@@ -17,7 +17,8 @@ interface Show {
 // Fetch shows data (can be moved to a separate service file)
 const fetchShows = async (): Promise<Show[]> => {
   try {
-    const response = await axios.get("/api/shows");
+    // const response = await axios.get("/api/shows");
+    const response = await axios.get('/api/shows');
     const data = await response.data;
     return data.data;
   } catch (error) {
