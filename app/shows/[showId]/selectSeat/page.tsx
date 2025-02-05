@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Show {
   id: string;
@@ -26,6 +27,7 @@ export default function SeatSelectorExample({
 
   
   const { seatsBooked } = useShowStore(); // Get from Zustand
+  const router = useRouter();
 
   console.log("seats booked ", seatsBooked);
 
@@ -123,6 +125,8 @@ export default function SeatSelectorExample({
                 selectedSeats,
                 paymentReference: res.razorpay_payment_id,
               });
+              // when bookind is success , send the user to the home route.
+              router.push('/')
 
               setBookingMessage("Booking successful!");
               setShow((prev) =>
