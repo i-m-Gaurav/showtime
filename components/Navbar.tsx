@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Search } from "lucide-react";
 import { MapPin } from "lucide-react";
 import logo from '../public/logo.png'
+import Link from 'next/link'
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -15,7 +16,10 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
+              <Link href = '/'>
               <Image src = {logo} alt = "logo image" width={120} height={120}/>
+
+              </Link>
             </div>
           </div>
 
