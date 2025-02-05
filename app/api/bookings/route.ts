@@ -39,10 +39,10 @@ export async function POST(req: NextRequest) {
     const seatIds = seats.map(seat => seat.id);
     console.log("🪑 Fetched seat IDs:", seatIds);
 
-    if (seatIds.length !== seatsBooked) {
-      console.error("❌ Mismatch in seats booked and available seat IDs:", { seatIds, seatsBooked });
-      return NextResponse.json({ message: "Some selected seats are unavailable" }, { status: 400 });
-    }
+    // if (seatIds.length !== seatsBooked) {
+    //   console.error("❌ Mismatch in seats booked and available seat IDs:", { seatIds, seatsBooked });
+    //   return NextResponse.json({ message: "Some selected seats are unavailable" }, { status: 400 });
+    // }
 
     // Create a booking
     const booking = await prisma.booking.create({
