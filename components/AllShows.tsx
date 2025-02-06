@@ -18,40 +18,6 @@ const AllShows = () => {
     return <p className="text-center text-xl text-gray-500">Loading...</p>
   }
  
-
-  // interface Show {
-  //   id: number;
-  //   name: string;
-  //   date: string;
-  //   location: string;
-  //   imageUrl: string;
-  // }
-
-  // const [shows, setShows] = useState<Show[]>([]);
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const fetchShows = async () => {
-  //       try {
-  //         const response = await axios.get("/api/shows");
-  //         // Access the data property of the response
-  //         setShows(response.data.data);
-  //       } catch (error) {
-  //         console.error("Error fetching shows:", error);
-  //       } finally {
-  //         setIsLoading(false);
-  //       }
-  //     };
-
-  //   fetchShows();
-  // }, []);
-
-  // if (isLoading) {
-  //   return <p className="text-center text-xl text-gray-500">Loading...</p>;
-  // }
-
-  
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">All Shows</h1>

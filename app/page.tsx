@@ -11,17 +11,11 @@ import MoviesComingSoon from '@/components/MoviesComingSoon';
 import Footer from '@/components/Footer';
 export default function Home() {
 
-  const bannerImages = [
-    'https://static.vecteezy.com/system/resources/previews/017/351/717/non_2x/awesome-show-banner-sign-for-festival-events-design-circus-style-vintage-style-illuminated-light-vector.jpg',
-    'https://static.vecteezy.com/system/resources/previews/017/351/717/non_2x/awesome-show-banner-sign-for-festival-events-design-circus-style-vintage-style-illuminated-light-vector.jpg',
-    'https://static.vecteezy.com/system/resources/previews/017/351/717/non_2x/awesome-show-banner-sign-for-festival-events-design-circus-style-vintage-style-illuminated-light-vector.jpg',
-  ];
-
   return (
     <div className='flex flex-col items-center mt-10'>
 
       <FeaturedShows/>
-      <BannerCarousel images={bannerImages}/>
+      <BannerCarousel/>
       <ComedyShows/>
       <PoetryShows/>
       <ListYourShow/>
