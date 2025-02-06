@@ -1,45 +1,54 @@
 "use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from 'next/link'
+import useFeaturedShowsStore from "@/store/FeaturedShowsStore";
 
 const AllShows = () => {
+
+  const {shows, isLoading, fetchShows} = useFeaturedShowsStore();
+
+  useEffect(()=>{
+    fetchShows();
+  },[fetchShows]);
+
+  if(isLoading){
+    return <p className="text-center text-xl text-gray-500">Loading...</p>
+  }
  
 
-  interface Show {
-    id: number;
-    name: string;
-    date: string;
-    location: string;
-    imageUrl: string;
-  }
+  // interface Show {
+  //   id: number;
+  //   name: string;
+  //   date: string;
+  //   location: string;
+  //   imageUrl: string;
+  // }
 
+  // const [shows, setShows] = useState<Show[]>([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const fetchShows = async () => {
+  //       try {
+  //         const response = await axios.get("/api/shows");
+  //         // Access the data property of the response
+  //         setShows(response.data.data);
+  //       } catch (error) {
+  //         console.error("Error fetching shows:", error);
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     };
 
-  const [shows, setShows] = useState<Show[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  //   fetchShows();
+  // }, []);
 
-  useEffect(() => {
-    const fetchShows = async () => {
-        try {
-          const response = await axios.get("/api/shows");
-          // Access the data property of the response
-          setShows(response.data.data);
-        } catch (error) {
-          console.error("Error fetching shows:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-    fetchShows();
-  }, []);
-
-  if (isLoading) {
-    return <p className="text-center text-xl text-gray-500">Loading...</p>;
-  }
+  // if (isLoading) {
+  //   return <p className="text-center text-xl text-gray-500">Loading...</p>;
+  // }
 
   
 
