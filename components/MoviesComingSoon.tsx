@@ -61,15 +61,6 @@ const MoviesComingSoon = () => {
               <div className="absolute w-72 h-72 border-4 border-purple-500/20 rounded-full animate-[spin_8s_linear_infinite]"></div>
               <div className="absolute w-56 h-56 border-4 border-pink-500/20 rounded-full animate-[spin_6s_linear_infinite_reverse]"></div>
               <div className="absolute w-40 h-40 border-4 border-indigo-500/20 rounded-full animate-[spin_4s_linear_infinite]"></div>
-              
-              {/* Center content */}
-              {/* <div className="relative z-10 bg-gray-800 p-6 rounded-2xl shadow-xl">
-                <Film className="h-16 w-16 text-purple-400 mb-4" />
-                <div className="text-center">
-                  <div className="font-bold mb-1">Movies</div>
-                  <div className="text-purple-400 text-sm">Coming Soon</div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
