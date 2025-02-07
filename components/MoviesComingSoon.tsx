@@ -48,9 +48,7 @@ const MoviesComingSoon = () => {
                 Notify Me When Live
               </button>
               
-              <button className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors">
-                Learn More
-              </button>
+             
             </div>
           </div>
 

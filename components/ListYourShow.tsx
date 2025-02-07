@@ -70,6 +70,12 @@ const ListYourShow = () => {
             </div>
           </div>
 
+          <div className="absolute top-0 right-0 w-40 h-40 bg-purple-400/30 rounded-lg transform rotate-12"></div>
+          <div className="absolute top-10 right-10 w-40 h-40 bg-indigo-400/30 rounded-lg transform -rotate-6"></div>
+          {/* <div className="absolute top-20 right-20 w-40 h-40 bg-pink-400/30 rounded-lg transform rotate-3"> */}
+                {/* <div className="absolute inset-0 flex items-center justify-center">
+                  <Ticket className="h-16 w-16 text-white/70" />
+                </div> */}
          
         </div>
       </div>
