@@ -60,7 +60,7 @@ const ListYourShow = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="https://showtime-blond.vercel.app/"
+                href="https://admin-showtimee.vercel.app/"
                 className="px-6 py-3  bg-white text-purple-700  hover:bg-purple-400 hover:text-white rounded-full font-medium flex items-center justify-center gap-2 transition-colors"
               >
                 List Your Show
