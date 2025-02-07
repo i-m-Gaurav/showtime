@@ -1,13 +1,5 @@
-// pages/api/verify-razorpay-payment.js
-// import Razorpay from "razorpay";
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-
-// const razorpay = new Razorpay({
-//     key_id: process.env.RAZORPAY_KEY_ID as string,
-//     key_secret: process.env.RAZORPAY_KEY_SECRET as string,
-// });
-
 
 export async function POST(req : NextRequest) {
     
