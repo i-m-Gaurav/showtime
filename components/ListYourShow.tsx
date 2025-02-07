@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const ListYourShow = () => {
   return (
-    <div className="w-full bg-gradient-to-br from-purple-900 to-purple-700 text-white py-16">
+    <div className="w-full relative overflow-hidden bg-gradient-to-br from-purple-900 to-purple-700 text-white py-16">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-white/10 blur-xl"></div>
