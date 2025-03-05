@@ -9,15 +9,6 @@ import { ChevronRight } from "lucide-react";
 import Loader from "./Loader";
 
 const AllShows = () => {
-  // const {shows, isLoading, fetchShows} = useFeaturedShowsStore();
-
-  // useEffect(()=>{
-  //   fetchShows();
-  // },[fetchShows]);
-
-  // if(isLoading){
-  //   return <p className="text-center text-xl text-gray-500">Loading...</p>
-  // }
 
   const { shows, isLoading, fetchShows } = useFeaturedShowsStore();
 
